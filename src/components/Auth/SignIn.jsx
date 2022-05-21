@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import { Title, Input, Button, Form, StyledLink } from './style';
 import api from '../utils/api';
+import UserContext from "./../../context/UserContext.jsx"
 
 function SignIn() {
   const navigate = useNavigate();
+  const { setToken } = useContext(UserContext);
 
   const [formInfo, setFormInfo] = useState({});
 
@@ -15,8 +17,9 @@ function SignIn() {
     api.signIn(formInfo).then(handleSuccess).catch((error) => console.log(error))
   }
 
-  function handleSuccess(){
-    navigate('/')
+  function handleSuccess(res){
+    setToken(res.data);
+    navigate('/home')
   }
 
   return (
