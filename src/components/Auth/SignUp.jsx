@@ -79,7 +79,7 @@ function SignUp() {
 
         <Button type="submit">Cadastrar</Button>
       </Form>
-      <StyledLink to="/sign-in">Já tem uma conta? Entre agora</StyledLink>
+      <StyledLink to="/">Já tem uma conta? Entre agora</StyledLink>
     </>
   )
 }

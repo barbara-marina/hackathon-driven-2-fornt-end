@@ -2,12 +2,30 @@
 import Header from "../Header/Header.jsx";
 import styled from "styled-components";
 import {IoIosArrowForward} from "react-icons/io";
-import {useNavigate} from "react-router-dom";
-import { useState } from "react";
+//import {useNavigate} from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import UserContext from "../../context/UserContext.jsx";
+import axios from "axios";
 
 export default function Home(){
+    const {token} = useContext(UserContext);
     const [isSelected, setSelected] = useState(false);
-    const navigate = useNavigate();
+    const [questions, setQuestions] = useState([]);
+    // const navigate = useNavigate();
+
+    useEffect(() => {
+        const URL_questions = `${process.env.REACT_APP_URL_API}/questions`;
+        const config = {headers: { Authorization: `Bearer ${token}`}};
+        const request = axios.get(URL_questions, config);
+
+        request.then((response) => {
+            console.log(response.data);
+            setQuestions(response.data);
+        });
+        request.catch(e => console.log("error", e));
+    }, []);
+
+
     
     return (
         <>
@@ -18,7 +36,11 @@ export default function Home(){
                     <IoIosArrowForward color="#0000cd" size={30} onClick={() => setSelected(true)}/>
                 </Div>
                 <DivQuestion opened={isSelected}>
-                    <Title >Abri a  questão?</Title>
+                {questions.map((question,id) =>{
+                
+                    <Title key={id}>{question.name}</Title>
+                
+                })}
                 </DivQuestion>
 
             </ContainerHome>

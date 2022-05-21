@@ -1,14 +1,25 @@
 import styled from "styled-components";
 import {BiLogOut} from "react-icons/bi";
+import { useContext, useState, useEffect } from "react";
+import UserContext from "./../../context/UserContext.jsx";
+import axios from "axios";
 
-export default function Header(props){
-    const {username, image} = props
+export default function Header(){
+    const {token} = useContext(UserContext);
+    const [userData, setUserData] = useState([]);
+    
+    useEffect(() =>{
+        const URL_User = `${process.env.REACT_APP_URL_API}/user`;
+        const config = {headers: { Authorization: `Bearer ${token}`}};
+        const request = axios.get(URL_User, config);
 
-
-    // useEffect(() =>{
-    //     const URL_User = `${process.env.REACT_APP_URL_API}/user`;
+        request.then((response) => {
+            console.log(response.data);
+            setUserData(response.data)
+        });
+        request.catch(e => console.log("error", e));
         
-    // }, []);
+    }, [token]);
 
     // function logOut(){
     //     const URL_LogOut = `${process.env.REACT_APP_URL_API}/log-out`;
@@ -18,8 +29,8 @@ export default function Header(props){
     return (
         <ContainerTop>
             <Div>
-                <Photo src={image} alt="foto do usuario"></Photo>
-                <Title>Olá, {username}!!</Title>
+                <Photo src={userData.picture} alt="foto do usuario"></Photo>
+                <Title>Olá, {userData.name}!!</Title>
             </Div>
             <Div>
                 <BiLogOut color="#ffffff" size={35} />
@@ -53,8 +64,6 @@ const Title = styled.h1`
     display:flex;
     align-items: center;
 
-
-    
     color: #ffffff;
 `;
 
