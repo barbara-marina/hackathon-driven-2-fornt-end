@@ -5,6 +5,16 @@ export default function Header(props){
     const {username, image} = props
 
 
+    // useEffect(() =>{
+    //     const URL_User = `${process.env.REACT_APP_URL_API}/user`;
+        
+    // }, []);
+
+    // function logOut(){
+    //     const URL_LogOut = `${process.env.REACT_APP_URL_API}/log-out`;
+    //     const request = axios.delete(URL_LogOut, config);
+    // }
+    
     return (
         <ContainerTop>
             <Div>
@@ -12,7 +22,8 @@ export default function Header(props){
                 <Title>Olá, {username}!!</Title>
             </Div>
             <Div>
-                <BiLogOut color="#ffffff" size={35}/>
+                <BiLogOut color="#ffffff" size={35} />
+                {/* onClick={logOut} */}
             </Div>
         </ContainerTop>
     )
@@ -27,7 +38,6 @@ const ContainerTop = styled.div`
     align-items: center;
 
     background-color: #0000CD;
-
     padding: 15px;
 `;
 
@@ -42,6 +52,7 @@ const Title = styled.h1`
     align-items: center;
 
 
+    
     color: #ffffff;
 `;
 
