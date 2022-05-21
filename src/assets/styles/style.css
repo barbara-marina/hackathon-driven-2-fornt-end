@@ -1,0 +1,12 @@
+body {
+    font-family: "SoDo Sans SemiBold";
+    display: flex;
+    justify-content: center;
+  }
+
+.root {
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

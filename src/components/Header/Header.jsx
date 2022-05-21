@@ -36,6 +36,8 @@ const ContainerTop = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    top: 0;
 
     background-color: #0000CD;
     padding: 15px;
